@@ -31,13 +31,34 @@ print(titanic_csv.head())
 print("\nprinting last 5 using 'tail'")
 print(titanic_csv.tail())
 
-titanic_csv.info()
+titanic_csv.info() #displaying complete information of the data frame, like data type of each rows, how many rows, how many columns
 
 print("\nprinting the statistical summary using 'describe'")
-print(titanic_csv.describe())
+print(titanic_csv.describe()) # only applied for the entire dataframe
 
 print("\nprinting the shape of the csv")
 print(titanic_csv.shape)
 
+print("\nprinting three columns of the csv")
+print(titanic_csv[["Name", "Fare", "Age"]])
+
 print("\nprinting only one column of the csv")
-print(titanic_csv["Name"]) # similar to a series !!
+print(titanic_csv[["Age"]]) # similar to a series !!
+
+print("\nprinting the mean of only one column")
+print(titanic_csv["Age"].mean()) # works bc one column is just a series, so you can apply series operations to it
+
+print("\nprinting the maximum fare")
+print(titanic_csv["Fare"].max())
+
+print("\nprinting all the age values that are only greater than 60")
+### METHOD 1
+# ageGreaterThan50 = titanic_csv[titanic_csv["Age"] > 60] # sort of creates a separate dataframe in a manner
+# print(ageGreaterThan50[["Name", "Age"]])
+
+### METHOD 2
+print(titanic_csv[titanic_csv["Age"] > 60][["Age", "Name"]]) # another method to do this
+
+print("\nAll the people who's age 18 or greater, and travelling in Passenger class 1")
+ageGreaterThan18Pclass1 = titanic_csv[(titanic_csv["Age"] > 18) & (titanic_csv["Pclass"] == 1)]
+print(ageGreaterThan18Pclass1)
