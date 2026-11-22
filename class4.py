@@ -18,6 +18,8 @@ print(pd.DataFrame(people))
 
 titanic_csv = pd.read_csv(r"C:\Users\Ravis\Documents\Riddhima\python\data science\titanic.csv")
 
+"""
+
 print("\nshowing the titanic csv")
 
 print(titanic_csv)
@@ -62,3 +64,48 @@ print(titanic_csv[titanic_csv["Age"] > 60][["Age", "Name"]]) # another method to
 print("\nAll the people who's age 18 or greater, and travelling in Passenger class 1")
 ageGreaterThan18Pclass1 = titanic_csv[(titanic_csv["Age"] > 18) & (titanic_csv["Pclass"] == 1)]
 print(ageGreaterThan18Pclass1)
+
+"""
+
+### CLASS 5 ###
+
+print("\nslicing the dataframe")
+slice = titanic_csv.iloc[45:61, 3:5] # index of rows and columns
+# the i in iloc stands for "index", meaning it's index specific
+print(slice)
+
+print("\ncondition based slicing")
+# display name and sex of all passengers whos age is less than 18
+
+ageLessThan18 = titanic_csv[(titanic_csv["Age"] < 18)]
+print(ageLessThan18.head())
+# slice2 = titanic_csv[ageLessThan18, ageLessThan18["Name", "Sex"]]
+slice2 = ageLessThan18[["Name", "Sex", "Age"]]
+print(slice2)
+
+# METHOD 2 #
+print("\nmethod 2 for condition based slicing")
+
+slice3 = titanic_csv.loc[titanic_csv["Age"] < 18, ["Name", "Sex", "Age"]]
+
+print(slice3)
+
+print("\nusing loc to print all the names of passengers from row number 1 through 20")
+
+slice4 = titanic_csv.loc[1:21, ["Name"]]
+
+print(slice4)
+
+print("\nchanging the values of the first 3 rows")
+titanic_csv.loc[1:3, ["Name"]] = ["Bob", "Thomas", "Jeff"]
+print(titanic_csv.loc[1:3, ["Name"]]) # all changes only change the dataframe, not the actual csv file
+
+# 1 - Mr. Owen Harris Braund
+# 2 - Mrs. John Bradley (Florence Briggs Thayer) Cumings
+# 3 - Miss. Laina Heikkinen
+
+print("\nadding a new column to dataframe")
+
+titanic_csv["Discounted Fare"] = titanic_csv["Fare"]/2
+
+print(titanic_csv.head())
